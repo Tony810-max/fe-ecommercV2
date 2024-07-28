@@ -6,7 +6,7 @@ import { Heart, ShoppingCart } from "lucide-react";
 const Header = () => {
   return (
     <div className="container flex items-center justify-between pt-10 pb-4">
-      <span className="font-sans text-lg font-bold py-2 block">Exclusive</span>
+      <span className="font-sans text-3xl font-bold py-2 block">Exclusive</span>
       <RoutePage />
       <div className="flex items-center gap-6">
         <Input
