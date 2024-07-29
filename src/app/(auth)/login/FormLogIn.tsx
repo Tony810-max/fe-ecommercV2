@@ -8,6 +8,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import ROUTES from "@/types/routes";
 import { loginSchema } from "./types/loginSchema";
+import axios, { AxiosError } from "axios";
+import { API_URL } from "@/types/common";
+import { toast } from "react-toastify";
 
 type formLogin = {
   email: string;
@@ -19,8 +22,33 @@ const FormLogIn = () => {
     resolver: yupResolver(loginSchema),
   });
 
-  const handleLogin = (data: formLogin) => {
-    console.log(data);
+  const handleLogin = async (data: formLogin) => {
+    try {
+      const response = await axios.post(`${API_URL}/api/v1/users/login`, {
+        email: data.email,
+        password: data.password,
+      });
+
+      if (response) {
+        console.log(response);
+        localStorage.setItem("user", JSON.stringify(response.data.user));
+        localStorage.setItem("token", JSON.stringify(response.data.token));
+
+        toast.success("Login successful");
+        setTimeout(() => {
+          window.location.href = ROUTES.HOME;
+        }, 1500);
+      }
+    } catch (error) {
+      const errors = error as AxiosError<{ message: string }>;
+      const status = errors?.response?.status;
+      const errMessage = errors.response?.data?.message;
+
+      if (status === 401 || status === 404 || status === 400)
+        return toast.error(errMessage);
+
+      console.error(errors);
+    }
   };
 
   return (
