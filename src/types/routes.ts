@@ -8,6 +8,7 @@ const ROUTES = {
   REGISTER: "/register",
   PRODUCT: "/product",
   CART: "/cart",
+  WISHLIST: "/wishlist",
   CHECKOUT: "/checkout",
   ORDERS: "/orders",
 };

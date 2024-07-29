@@ -2,6 +2,8 @@ import React from "react";
 import RoutePage from "./components/RoutePage";
 import { Input } from "@/components/ui/input";
 import { Heart, ShoppingCart } from "lucide-react";
+import Link from "next/link";
+import ROUTES from "@/types/routes";
 
 const Header = () => {
   return (
@@ -14,8 +16,12 @@ const Header = () => {
           placeholder="What are you looking for?"
         />
         <div className="flex gap-4">
-          <Heart />
-          <ShoppingCart />
+          <Link href={ROUTES.WISHLIST} className="hover:opacity-50">
+            <Heart />
+          </Link>
+          <Link href={ROUTES.CART} className="hover:opacity-50">
+            <ShoppingCart />
+          </Link>
         </div>
       </div>
     </div>
