@@ -25,7 +25,7 @@ const CheckoutPage = () => {
   }, []);
 
   const handleCheckout = (data: unknown) => {
-    console.log(data);
+    data;
   };
 
   if (!mounted) {

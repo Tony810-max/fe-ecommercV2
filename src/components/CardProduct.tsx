@@ -1,30 +1,60 @@
 "use client";
-import { Eye, Heart } from "lucide-react";
-import Image from "next/image";
 import React from "react";
+import Image from "next/image";
+import { Eye, Heart } from "lucide-react";
 import ReactStars from "react-rating-stars-component";
+import axios from "../util/axios.customize";
+
 import { Button } from "./ui/button";
+import { API_URL } from "@/types/common";
+import { toast } from "react-toastify";
+import { AxiosError } from "axios";
 
 interface ICardProduct {
-  price: number;
+  id?: string;
+  priceOrigin: number;
   discount: number;
   name: string;
   rating: number;
   countReview: number;
-  sale?: number;
+  salePercent?: number;
   image: string;
+  userID?: string;
+  quantity?: number;
 }
 
 const CardProduct: React.FC<ICardProduct> = ({
   name,
   discount,
-  price,
   rating,
   countReview,
-  sale,
+  id,
+  priceOrigin,
+  salePercent,
   image,
+  quantity,
+  userID,
 }) => {
   const [open, setOpen] = React.useState(false);
+
+  const handleAddToCart = async () => {
+    try {
+      const response = await axios.post(`${API_URL}/api/v1/carts/${id}`, {
+        quantity: quantity ? quantity : 1,
+        userId: userID,
+      });
+      if (response) {
+        toast.success("Added to cart");
+      }
+    } catch (error) {
+      const errors = error as AxiosError<{ message: string }>;
+      const status = errors?.response?.status;
+      const errMessage = errors.response?.data?.message;
+      if (status === 401 || status === 404 || status === 404) {
+        toast.error(errMessage);
+      }
+    }
+  };
 
   return (
     <div
@@ -41,14 +71,15 @@ const CardProduct: React.FC<ICardProduct> = ({
               className={`absolute font-sans text-base w-full bottom-[-30px]   ${
                 open ? "animate__animated animate__slideInUp" : ""
               }`}
+              onClick={handleAddToCart}
             >
               Add To Cart
             </Button>
           )}
         </div>
-        {sale && (
+        {salePercent && (
           <span className="absolute top-3 left-3 bg-[#db4444] px-3 py-1 text-white rounded-lg">
-            -{sale}%
+            -{salePercent}%
           </span>
         )}
         <div className="absolute top-3 right-3 space-y-2">
@@ -67,9 +98,11 @@ const CardProduct: React.FC<ICardProduct> = ({
       <div className="space-y-2 w-fit">
         <span className="font-sans text-lg font-bold">{name}</span>
         <div className="space-x-3">
-          <span className="font-sans text-base text-red-600 ">${price}</span>
+          <span className="font-sans text-base text-red-600 ">
+            ${discount ? discount : priceOrigin}
+          </span>
           <span className="font-sans text-base line-through text-[#494949]">
-            ${discount}
+            {discount ? `$${priceOrigin}` : ""}
           </span>
         </div>
         <div className="flex gap-2 items-center">

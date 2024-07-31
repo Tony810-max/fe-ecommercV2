@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Autoplay from "embla-carousel-autoplay";
 
@@ -7,8 +8,21 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import CardProduct from "@/components/CardProduct";
+import { ProductContext } from "@/context/productContex";
 
 const CarouselCardProduct = () => {
+  const context = React.useContext(ProductContext);
+  const dataProduct = context?.dataProduct;
+  const filterSaleProduct = dataProduct?.filter(
+    (product) => product.isSale === true
+  );
+
+  const user =
+    typeof window !== "undefined"
+      ? JSON.parse(localStorage.getItem("user") || "null")
+      : null;
+
+
   return (
     <Carousel
       className="w-full"
@@ -22,50 +36,24 @@ const CarouselCardProduct = () => {
       }}
     >
       <CarouselContent>
-        <CarouselItem className="basis-1/3">
-          <CardProduct
-            image="images/HomePage/flashSales1.webp"
-            name="HAVIT HV-G92 Gamepad"
-            price={120}
-            sale={40}
-            discount={160}
-            rating={4}
-            countReview={88}
-          />
-        </CarouselItem>
-        <CarouselItem className="basis-1/3">
-          <CardProduct
-            image="images/HomePage/flashSales1.webp"
-            name="HAVIT HV-G92 Gamepad"
-            price={120}
-            sale={40}
-            discount={160}
-            rating={4}
-            countReview={88}
-          />
-        </CarouselItem>
-        <CarouselItem className="basis-1/3">
-          <CardProduct
-            image="images/HomePage/flashSales1.webp"
-            name="HAVIT HV-G92 Gamepad"
-            price={120}
-            sale={40}
-            discount={160}
-            rating={4}
-            countReview={88}
-          />
-        </CarouselItem>
-        <CarouselItem className="basis-1/3">
-          <CardProduct
-            image="images/HomePage/flashSales1.webp"
-            name="HAVIT HV-G92 Gamepad"
-            price={120}
-            sale={40}
-            discount={160}
-            rating={4}
-            countReview={88}
-          />
-        </CarouselItem>
+        {filterSaleProduct?.map((product, index) => {
+          if (index < 5)
+            return (
+              <CarouselItem className="basis-1/4" key={product?.id}>
+                <CardProduct
+                  userID={user?._id}
+                  id={product?.id}
+                  image={product?.image}
+                  name={product?.name}
+                  discount={product?.discount}
+                  priceOrigin={product?.priceOrigin}
+                  salePercent={product?.salePercent}
+                  rating={product?.rating}
+                  countReview={product?.countInStock}
+                />
+              </CarouselItem>
+            );
+        })}
       </CarouselContent>
     </Carousel>
   );

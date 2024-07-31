@@ -30,7 +30,6 @@ const FormLogIn = () => {
       });
 
       if (response) {
-        console.log(response);
         localStorage.setItem("user", JSON.stringify(response.data.user));
         localStorage.setItem("token", JSON.stringify(response.data.token));
 

@@ -32,7 +32,7 @@ const BestSellingProducts = () => {
               image="images/HomePage/flashSales1.webp"
               name="HAVIT HV-G92 Gamepad"
               rating={4}
-              price={260}
+              priceOrigin={260}
               discount={360}
               countReview={65}
             />
@@ -42,7 +42,7 @@ const BestSellingProducts = () => {
               image="images/HomePage/flashSales1.webp"
               name="HAVIT HV-G92 Gamepad"
               rating={4}
-              price={260}
+              priceOrigin={260}
               discount={360}
               countReview={65}
             />
@@ -52,7 +52,7 @@ const BestSellingProducts = () => {
               image="images/HomePage/flashSales1.webp"
               name="HAVIT HV-G92 Gamepad"
               rating={4}
-              price={260}
+              priceOrigin={260}
               discount={360}
               countReview={65}
             />
@@ -62,7 +62,7 @@ const BestSellingProducts = () => {
               image="images/HomePage/flashSales1.webp"
               name="HAVIT HV-G92 Gamepad"
               rating={4}
-              price={260}
+              priceOrigin={260}
               discount={360}
               countReview={65}
             />

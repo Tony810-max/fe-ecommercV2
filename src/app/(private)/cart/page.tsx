@@ -3,6 +3,7 @@ import BreadcrumbCart from "./components/BreadcrumbCart";
 import TableCart from "./components/TableCart";
 import ReuturnUpdate from "./components/ReuturnUpdate";
 import CheckoutCart from "./components/CheckoutCart";
+import { CartProvider } from "@/context/cartContext";
 
 const CartPage = () => {
   return (
@@ -10,8 +11,10 @@ const CartPage = () => {
       <BreadcrumbCart />
       <div className="pb-36">
         <div className="space-y-6">
-          <TableCart />
-          <ReuturnUpdate />
+          <CartProvider>
+            <TableCart />
+            <ReuturnUpdate />
+          </CartProvider>
         </div>
         <CheckoutCart />
       </div>

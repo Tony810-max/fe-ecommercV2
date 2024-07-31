@@ -5,11 +5,12 @@ const instance = axios.create({
   baseURL: API_URL,
 });
 
-instance.defaults.headers.common["Authorization"] = AUTH_TOKEN;
-
 // Add a request interceptor
 instance.interceptors.request.use(
   function (config) {
+    const token = JSON.parse(localStorage.getItem("token"));
+    config.headers.Authorization = `Bearer ${token}`;
+
     // Do something before request is sent
     return config;
   },

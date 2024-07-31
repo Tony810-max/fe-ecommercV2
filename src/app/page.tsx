@@ -6,11 +6,14 @@ import BrowseByCategory from "./(public)/HomePage/BrowseByCategory";
 import ExploreOurProducts from "./(public)/HomePage/ExploreOurProducts";
 import Featured from "./(public)/HomePage/Featured";
 import ServiceSection from "./(public)/HomePage/ServiceSection";
+import { ProductProivder } from "@/context/productContex";
 
 const HomePage = () => {
   return (
     <div className="container">
-      <FlashSalesSection />
+      <ProductProivder>
+        <FlashSalesSection />
+      </ProductProivder>
       <BrowseByCategory />
       <BestSellingProducts />
       <ExploreOurProducts />

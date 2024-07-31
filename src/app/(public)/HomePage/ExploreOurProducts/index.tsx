@@ -84,7 +84,7 @@ const ExploreOurProducts = () => {
           <CardProduct
             image={data?.image}
             name={data?.name}
-            price={data?.price}
+            priceOrigin={data?.price}
             discount={data?.discount}
             rating={data?.rating}
             countReview={data?.countReview}

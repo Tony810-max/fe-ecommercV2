@@ -48,8 +48,11 @@ const DATA_CATEGORIES = [
 
 const BrowseByCategory = () => {
   return (
-    <div>
-      <Title title="Categories" />
+    <div className="py-20 space-y-14">
+      <div className="space-y-5">
+        <Title title="Categories" />
+        <span className="block font-sans text-3xl font-bold"> Browse By Category</span>
+      </div>
       <Carousel>
         <CarouselContent>
           {DATA_CATEGORIES?.map((category) => (
