@@ -2,7 +2,7 @@ import React from "react";
 
 interface IPriceCart {
   title: string;
-  price: string;
+  price: string | number | null;
 }
 
 const PriceCart: React.FC<IPriceCart> = ({ price, title }) => {

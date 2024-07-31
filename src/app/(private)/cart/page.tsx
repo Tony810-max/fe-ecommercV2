@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import BreadcrumbCart from "./components/BreadcrumbCart";
 import TableCart from "./components/TableCart";
@@ -10,13 +11,13 @@ const CartPage = () => {
     <div className="container">
       <BreadcrumbCart />
       <div className="pb-36">
-        <div className="space-y-6">
-          <CartProvider>
+        <CartProvider>
+          <div className="space-y-6">
             <TableCart />
             <ReuturnUpdate />
-          </CartProvider>
-        </div>
-        <CheckoutCart />
+          </div>
+          <CheckoutCart />
+        </CartProvider>
       </div>
     </div>
   );
